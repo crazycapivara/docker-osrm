@@ -2,17 +2,16 @@ FROM osrm/osrm-backend
 
 LABEL maintainer="crazycapivara@gmail.com"
 
-ARG OSM_DATA_SOURCE="http://download.geofabrik.de/europe/iceland-latest.osm.pbf"
+ARG OSM_DATA_SOURCE=europe/monaco-latest
 
 WORKDIR /data
 
-RUN wget $OSM_DATA_SOURCE && \
-	OSM_DATA=$(basename $OSM_DATA_SOURCE .osm.pbf) && \
-	echo $OSM_DATA > /data/OSM_DATA && \
+RUN wget http://download.geofabrik.de/${OSM_DATA_SOURCE}.osm.pbf && \
+	OSM_DATA=$(basename $OSM_DATA_SOURCE) && \
 	osrm-extract -p /opt/car.lua ${OSM_DATA}.osm.pbf && \
 	osrm-contract ${OSM_DATA}.osrm && \
 	rm ${OSM_DATA}.osm.pbf
 
-CMD OSM_DATA=$(cat /data/OSM_DATA) && \
-	osrm-routed ${OSM_DATA}.osrm
+CMD OSM_DATA=$(ls /data/*.osrm) && \
+	osrm-routed $OSM_DATA
 
