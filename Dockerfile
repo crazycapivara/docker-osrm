@@ -1,6 +1,6 @@
 FROM osrm/osrm-backend
 
-LABEL maintainer="crazycapivara@gmail.com"
+LABEL maintainer="Stefan Kuethe <crazycapivara@gmail.com>"
 
 ARG OSM_DATA_SOURCE=europe/monaco-latest
 
