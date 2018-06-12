@@ -2,7 +2,7 @@ FROM osrm/osrm-backend
 
 LABEL maintainer="Stefan Kuethe <crazycapivara@gmail.com>"
 
-ARG OSM_DATA_SOURCE=europe/monaco-latest
+ARG OSM_DATA_SOURCE=europe/portugal-latest
 
 WORKDIR /data
 
